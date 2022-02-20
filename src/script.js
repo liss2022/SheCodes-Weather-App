@@ -94,6 +94,29 @@ function showWeather(response) {
 let searchEngine = document.querySelector("#enter-city");
 searchEngine.addEventListener("submit", cities);
 
+
+function currentLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(getPosition);
+  }
+  
+  function getPosition(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+  
+    let apiKey = "647c7f64d4d8e2cb344d1165b1ce2c4e";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=&units=metric`;
+    axios.get(`${apiUrl}${lat}&lon=${lon}&appid=${apiKey}&appid=${apiKey}`).then(showWeather);
+  
+    let p = document.querySelector("#cityTemp");
+    p.innerHTML = response.data.main.temp;
+  
+  
+    
+  }
+  let currentButton = document.querySelector("#location");
+  currentButton.addEventListener("click", currentLocation);
+
 function conversionTemp(event){
     event.preventDefault();
 
